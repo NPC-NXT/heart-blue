@@ -1,177 +1,162 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Floating Hearts — ❤️</title>
-  <style>
-    :root{
-      --bg-1:#0b0710;
-      --bg-2:#12081a;
-      --accent:#ff6b9a;
-      --text:#fff;
-    }
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));overflow:hidden;color:var(--text)}
-    .center {
-      position: absolute;
-      left:50%;
-      top:46%;
-      transform:translate(-50%,-50%);
-      text-align:center;
-      z-index: 10;
-      padding: 36px 44px;
-      border-radius: 14px;
-      backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      box-shadow: 0 18px 50px rgba(2,6,23,0.6);
-      min-width: 280px;
-      max-width: 1000px;
-    }
-    .center h1{
-      margin:0 0 10px 0;
-      font-size: clamp(28px, 6vw, 56px);
-      letter-spacing: -0.02em;
-      color: white;
-      line-height:1.02;
-    }
-    .subtitle{ margin:0; color:rgba(255,255,255,0.78); font-size:14px; opacity:0.8; }
-    .footer{ margin:8px 0 0; color:rgba(255,255,255,0.65); font-size:12px; opacity:0.7; }
-    /* HEARTS */
-    .heart {
-      position: fixed;
-      will-change: transform, opacity;
-      pointer-events: none;
-      z-index: 6;
-      font-size: 28px;
-      opacity: 0;
-      transform-origin: center;
-      animation: floatUp linear forwards;
-      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
-      user-select: none;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg) scale(0.7); opacity: 0; }
-      8% { opacity: 1; }
-      70% { opacity: 1; }
-      100% { transform: translateY(-160vh) rotate(360deg) scale(1.05); opacity: 0; }
-    }
-    /* sparkle */
-    .spark {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.6) 30%, rgba(255,255,255,0.05) 60%);
-      z-index:4;
-      pointer-events:none;
-      animation: floatUp linear forwards;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Floating Hearts – 💗</title>
+<meta name="description" content="Trang tim bay lãng mạn — đổi nội dung bằng ?text= trong URL." />
+
+<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+        background: radial-gradient(1200px 600px at 10% 10%, rgba(255,50,120,0.06), transparent),
+                    radial-gradient(800px 400px at 90% 80%, rgba(255,20,100,0.04), transparent),
+                    linear-gradient(180deg, #0b0710, #12081a);
+        color:#fff;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+        padding:32px;
     }
 
-    /* small responsiveness */
-    @media (max-width:480px){
-      .center{ padding:18px; top:44% }
-      .center h1{ font-size: clamp(20px, 9vw, 34px); }
-      .subtitle{ font-size:13px }
-      .footer{ font-size:11px }
+    .box{
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px 55px;
+        max-width: 900px;
+        text-align:center;
+        box-shadow:0 0 30px rgba(255,80,150,0.2);
     }
-  </style>
+
+    h1{
+        font-size: clamp(32px,5vw,52px);
+        margin-bottom: 16px;
+        font-weight:700;
+    }
+
+    .sub{
+        font-size: 16px;
+        opacity:0.85;
+        margin-bottom:10px;
+    }
+    .small{
+        font-size:14px;
+        opacity:0.65;
+    }
+
+    /* Tim */
+    .heart{
+        position: absolute;
+        animation: floatUp linear forwards;
+        pointer-events:none;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+    }
+
+    .shape{
+        width: 1em;
+        height: 1em;
+        background: red;
+        transform: rotate(45deg);
+        border-radius: 0.5em 0.5em 0 0;
+        position:relative;
+    }
+
+    .shape:before,
+    .shape:after{
+        content:"";
+        position:absolute;
+        width:1em;
+        height:1em;
+        background:inherit;
+        border-radius:50%;
+        top:-0.5em;
+    }
+
+    .shape:before{ left:-0.5em; }
+    .shape:after{ right:-0.5em; }
+
+    /* Animation */
+    @keyframes floatUp{
+        0%{
+            transform: translateY(0) scale(0.8);
+            opacity:0.8;
+        }
+        100%{
+            transform: translateY(-140vh) scale(1.25);
+            opacity:0;
+        }
+    }
+</style>
 </head>
+
 <body>
-  <div class="center" id="card">
-    <h1 id="title">Chào bạn ❤️</h1>
-    <p class="subtitle" id="subtitle">Mẹo: thay đổi nội dung chính bằng cách thêm <code>?text=Tên của bạn</code> vào URL</p>
-    <p class="footer">Tạo bằng trái tim phát sáng · Responsive · Hoạt ảnh mượt</p>
-  </div>
+
+<div class="box">
+    <h1 id="mainText">Em làm trái tim anh/ chị bay bổng.</h1>
+    <div class="sub">Mẹo: thay đổi nội dung chính bằng cách thêm <b>?text=Tin nhắn</b> vào URL</div>
+    <div class="small">Tạo bằng trái tim phát sáng • Nhiều màu • Bay toàn màn hình</div>
+</div>
 
 <script>
-  // --- Lấy text từ query param ?text=
-  function getQueryText() {
-    try {
-      const params = new URLSearchParams(location.search);
-      const raw = params.get('text') || params.get('name') || params.get('q') || '';
-      return decodeURIComponent(raw).trim().slice(0, 120);
-    } catch(e){ return ''; }
-  }
-  const userText = getQueryText();
-  const titleEl = document.getElementById('title');
-  const subtitleEl = document.getElementById('subtitle');
-  if (userText) {
-    titleEl.textContent = userText;
-    subtitleEl.textContent = "Chúc bạn một ngày thật ấm áp 💖";
-  }
+function rand(min, max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+}
 
-  // container (for removal safety)
-  const container = document.body;
-
-  // helper random
-  function rand(min, max){ return Math.random()*(max-min)+min; }
-  const heartVariants = ['❤️','💖','💘','💗','💕','❣️','💝'];
-
-  function createHeart(leftPercent){
+function createHeart(leftPercent){
     const heart = document.createElement('div');
     heart.className = 'heart';
-    heart.textContent = heartVariants[Math.floor(Math.random()*heartVariants.length)];
-    const size = Math.floor(rand(20, 56)); // size
+
+    // vị trí ngẫu nhiên toàn màn hình
+    const left = leftPercent ?? rand(2, 98);
+    const top = rand(5, 95);
+
+    heart.style.left = left + '%';
+    heart.style.top  = top + '%';
+
+    // kích thước tim
+    const size = rand(12, 30);
     heart.style.fontSize = size + 'px';
-    const left = (typeof leftPercent === 'number') ? leftPercent : rand(5,95);
-    heart.style.left = left + 'vw';
-    const duration = rand(6, 12); // seconds
+
+    // thời gian bay
+    const duration = rand(6, 12);
     heart.style.animationDuration = duration + 's';
-    // slight horizontal drift using translateX in style (random)
-    const rotate = (rand(-40,40)).toFixed(0);
-    heart.style.transform = `translateY(0) rotate(${rotate}deg) scale(${(size/40).toFixed(2)})`;
-    heart.style.opacity = 0;
-    container.appendChild(heart);
 
-    // remove after animation end (duration + small buffer)
-    setTimeout(()=>{
-      try{ container.removeChild(heart); }catch(e){}
-    }, (duration + 0.6) * 1000);
+    // tạo màu tim (rainbow)
+    const hue = rand(0, 360);
 
-    return heart;
-  }
+    const shape = document.createElement('div');
+    shape.className = 'shape';
+    shape.style.background = `hsl(${hue}, 80%, 65%)`;
 
-  function createSpark(leftPercent){
-    const s = document.createElement('div');
-    s.className = 'spark';
-    const left = (typeof leftPercent === 'number') ? leftPercent : rand(4,96);
-    s.style.left = left + 'vw';
-    const size = rand(4,10);
-    s.style.width = s.style.height = size + 'px';
-    const dur = rand(5,10);
-    s.style.animationDuration = dur + 's';
-    container.appendChild(s);
-    setTimeout(()=>{ try{ container.removeChild(s);}catch(e){} }, (dur+0.5)*1000);
-    return s;
-  }
+    heart.appendChild(shape);
+    document.body.appendChild(heart);
 
-  // spawn continuously but faster & more frequent
-  const spawnInterval = setInterval(createHeart, 280); // every 0.28s
-  const spawnSparkInterval = setInterval(createSpark, 900);
+    // xóa tim sau khi bay xong
+    setTimeout(()=> heart.remove(), duration * 1000);
+}
 
-  // spawn a burst on load (more hearts instantly)
-  for(let i=0;i<60;i++){
-    setTimeout(()=> createHeart(rand(5,95)), i*60);
-  }
+// 🔥 Sinh tim liên tục
+setInterval(()=> createHeart(), 40);
 
-  // click to spawn a short burst
-  document.addEventListener('click', (e)=>{
-    for(let i=0;i<20;i++){ setTimeout(()=> createHeart((e.clientX/window.innerWidth)*100 + rand(-6,6)), i*30); }
-  });
+// 🔥 Bắn 400 tim lúc mở trang
+for(let i=0; i<400; i++){
+    setTimeout(()=> createHeart(), i*20);
+}
 
-  // optional: subtle parallax
-  document.addEventListener('mousemove', (ev)=>{
-    const cx = window.innerWidth/2, cy = window.innerHeight/2;
-    const dx = (ev.clientX - cx) / cx;
-    const dy = (ev.clientY - cy) / cy;
-    document.getElementById('card').style.transform = `translate(-50%,-50%) translate(${dx*8}px, ${dy*8}px)`;
-  });
-
-  // free resources when leaving page
-  window.addEventListener('beforeunload', ()=>{
-    clearInterval(spawnInterval);
-    clearInterval(spawnSparkInterval);
-  });
+// Thay chữ theo URL: ?text=
+const urlParams = new URLSearchParams(window.location.search);
+const text = urlParams.get("text");
+if(text){
+    document.getElementById("mainText").innerText = text;
+}
 </script>
+
 </body>
 </html>
